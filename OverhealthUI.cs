@@ -6,11 +6,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
 using OverhealthMod.Common.Configs;
+using OverhealthMod.Utils;
 using ReLogic.Content;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI;
 using Terraria.GameContent.UI.ResourceSets;
+using Terraria.Initializers;
 using Terraria.ModLoader;
 
 namespace OverhealthMod;
@@ -52,6 +54,12 @@ public class OverhealthUI : ModSystem
         IL_Main.DrawInterface_14_EntityHealthBars += ILModify_Main_OtherPlayersHealthbarOverhealth; // Under players
         On_NewMultiplayerClosePlayersOverlay.Draw += MultiplayerHealthbarOverhealth; // Offscreen teammates
 
+        // Life Hair Dye edit, fix black hair during overhealth
+        // Microsoft.Xna.Framework.Color Terraria.Initializers.DyeInitializer/<>c::<LoadLegacyHairdyes>b__5_0(Terraria.Player,Microsoft.Xna.Framework.Color,System.Boolean&)
+        Type dyeInitializerType = typeof(DyeInitializer);
+        Type compilerGenerated = dyeInitializerType.GetNestedType("<>c", BindingFlags.NonPublic);
+        MethodInfo targetMethod = compilerGenerated.GetMethod("<LoadLegacyHairdyes>b__5_0", BindingFlags.NonPublic | BindingFlags.Instance);
+        QuickIL.EditMethod(targetMethod, ILModify_LifeHairDyeLifeCap);
     }
 
     private void ILModify_Main_OtherPlayersHealthbarOverhealth(ILContext il)
@@ -368,5 +376,13 @@ public class OverhealthUI : ModSystem
 
         Main.spriteBatch.End();
         Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.UIScaleMatrix);
+    }
+
+    private void ILModify_LifeHairDyeLifeCap(ILContext il)
+    {
+        ILCursor c = new(il);
+        c.GotoNext(MoveType.After, i => i.MatchAdd()); // Move after all calculations
+        c.EmitLdcR4(255f); // Max value
+        c.EmitCall(typeof(Math).GetMethod(nameof(Math.Min), [typeof(float), typeof(float)])); // Prevent going over 255 (max byte value)
     }
 }
