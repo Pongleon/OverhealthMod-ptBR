@@ -58,7 +58,7 @@ public static class CommonIL
     public static void GotoHealthCapCheck_Bge(this ILCursor c) => c.GotoHealthCapCheck(OpCodes.Bge, OpCodes.Bge_S);
 
     /// <summary>
-    /// Moves before 
+    /// Moves before
     /// <code>
     /// if (... {player}.statLife &gt; {player}.statLifeMax2 ...)
     /// </code>
@@ -66,7 +66,7 @@ public static class CommonIL
     public static void GotoHealthCapCheck_Ble(this ILCursor c) => c.GotoHealthCapCheck(OpCodes.Ble, OpCodes.Ble_S);
 
     /// <summary>
-    /// Moves before 
+    /// Moves before
     /// <code>
     /// if (... {player}.statLife &gt;= {player}.statLifeMax2 ...)
     /// </code>
@@ -74,7 +74,7 @@ public static class CommonIL
     public static void GotoHealthCapCheck_Blt(this ILCursor c) => c.GotoHealthCapCheck(OpCodes.Blt, OpCodes.Blt_S);
 
     /// <summary>
-    /// Moves before 
+    /// Moves before
     /// <code>
     /// if (... {player}.statLife &gt; {player}.statLifeMax2)
     ///     {player}.statLife = {player}.statLifeMax2;
@@ -164,7 +164,7 @@ public static class CommonIL
     /// if (... {player}.statLife &lt; {player}.statLifeMax2))
     ///     {player}.statLife = {player}.statLifeMax2;
     /// </code>
-    /// with 
+    /// with
     /// <code>
     /// OverhealthPlayer.CapOverhealth({player});
     /// </code>

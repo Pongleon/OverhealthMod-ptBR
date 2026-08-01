@@ -8,7 +8,6 @@ Colors: {
 Configs: {
 	GameplayConfig: {
 		DisplayName: Геймплей
-
 		Headers.Decay: Распад
 
 		MaximumOverhealth: {
@@ -50,9 +49,7 @@ Configs: {
 
 	VisualConfig: {
 		DisplayName: Визуал
-
 		Headers.Opacity: Прозрачность
-
 		Common.DisableNote: "[c/{$Colors.Note}:Установите на 0 для отключения.]"
 
 		ShowOverhealthUI: {
@@ -61,8 +58,8 @@ Configs: {
 		}
 
 		ClassicDisplaySetOpacity: {
-			Name: "Прозрачность стиля {$UI.HealthManaStyle_Default}" 
-			Label: "Прозрачность стиля [c/FFC2EC:{$UI.HealthManaStyle_Default}]"
+			Name: Прозрачность стиля {$UI.HealthManaStyle_Default}
+			Label: Прозрачность стиля [c/FFC2EC:{$UI.HealthManaStyle_Default}]
 			Tooltip:
 				'''
 				Настраивает прозрачность отображения сверхздоровья для стиля {$UI.HealthManaStyle_Default}.
@@ -71,8 +68,8 @@ Configs: {
 		}
 
 		FancyDisplaySetOpacity: {
-			Name: "Прозрачность стиля {$UI.HealthManaStyle_New}"
-			Label: "Прозрачность стиля [c/FFC2EC:{$UI.HealthManaStyle_New}]"
+			Name: Прозрачность стиля {$UI.HealthManaStyle_New}
+			Label: Прозрачность стиля [c/FFC2EC:{$UI.HealthManaStyle_New}]
 			Tooltip:
 				'''
 				Настраивает прозрачность отображения сверхздоровья для стилей {$UI.HealthManaStyle_New} и {$UI.HealthManaStyle_NewWithText}.
@@ -81,8 +78,8 @@ Configs: {
 		}
 
 		HorizontalBarsDisplaySetOpacity: {
-			Name: "Прозрачность стиля {$UI.HealthManaStyle_HorizontalBars}"
-			Label: "Прозрачность стиля [c/FFC2EC:{$UI.HealthManaStyle_HorizontalBars}]"
+			Name: Прозрачность стиля {$UI.HealthManaStyle_HorizontalBars}
+			Label: Прозрачность стиля [c/FFC2EC:{$UI.HealthManaStyle_HorizontalBars}]
 			Tooltip:
 				'''
 				Настраивает прозрачность отображения сверхздоровья для стилей {$UI.HealthManaStyle_HorizontalBars}, {$UI.HealthManaStyle_HorizontalBarsWithText} и {$UI.HealthManaStyle_HorizontalBarsWithFullText}.
@@ -92,7 +89,7 @@ Configs: {
 
 		MultiplayerHealthBarOpacity: {
 			Name: Прозрачность полос здоровья в мультиплеере
-			Label: "Прозрачность [c/DEC2FF:мультиплеерных] полос здоровья"
+			Label: Прозрачность [c/DEC2FF:мультиплеерных] полос здоровья
 			Tooltip:
 				'''
 				Настраивает прозрачность отображения сверхздоровья на полосах здоровья других игроков.
@@ -101,3 +98,5 @@ Configs: {
 		}
 	}
 }
+
+// Keybinds.MaxOverhealth.DisplayName: Max Overhealth

@@ -29,7 +29,7 @@ public class OverhealthPlayer : ModPlayer
     private int _overhealthDecreaseCounter = 0;
 
     /// <summary>
-    /// Overhealth basically is the health above maximum health. 
+    /// Overhealth basically is the health above maximum health.
     /// </summary>
     /// <remarks>Cannot be lower than 0.</remarks>
     public int Overhealth => Math.Max(0, Player.statLife - Player.statLifeMax2);
@@ -39,7 +39,7 @@ public class OverhealthPlayer : ModPlayer
     /// </summary>
     public int MaximumOverhealth => Math.Max(1, (int)(Player.statLifeMax2 * MaximumOverhealthPercent / 100f));
 
-    /// <summary>   
+    /// <summary>
     /// The base value of <see cref="Overhealth"/> passive decrease. <br/>
     /// <b>Raw</b> means it's a <c>float</c> value, while <see cref="Overhealth"/> is an <c>int</c> value.
     /// </summary>

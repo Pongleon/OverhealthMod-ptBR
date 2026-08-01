@@ -18,7 +18,6 @@ namespace OverhealthMod;
 [Autoload(Side = ModSide.Client)]
 public class OverhealthUI : ModSystem
 {
-    private Asset<Texture2D> _horizontalBarLeftPanelTexture;
     private Asset<Texture2D> _horizontalBarMiddlePanelTexture;
     private Asset<Texture2D> _classicHeartTexture;
     private Asset<Texture2D> _fancyHeartLeft;
@@ -36,7 +35,6 @@ public class OverhealthUI : ModSystem
     public override void Load()
     {
         // Textures
-        _horizontalBarLeftPanelTexture = Mod.Assets.Request<Texture2D>("Assets/HorizontalBar/PanelLeft");
         _horizontalBarMiddlePanelTexture = Mod.Assets.Request<Texture2D>("Assets/HorizontalBar/PanelMiddle");
         _classicHeartTexture = Mod.Assets.Request<Texture2D>("Assets/Classic/Heart");
         _fancyHeartLeft = Mod.Assets.Request<Texture2D>("Assets/Fancy/Left");
@@ -127,7 +125,7 @@ public class OverhealthUI : ModSystem
             num4 = Main.screenPosition.Y + Main.screenHeight - num4;
         }
 
-        Vector2 drawPosition = new Vector2(num3 - Main.screenPosition.X, num4 - Main.screenPosition.Y);
+        Vector2 drawPosition = new(num3 - Main.screenPosition.X, num4 - Main.screenPosition.Y);
 
         float percentFilled = (float)overhealth / maxLife;
         if (percentFilled > 1f) percentFilled = 1f;
@@ -135,7 +133,7 @@ public class OverhealthUI : ModSystem
         int widthToDraw = (int)(36f * percentFilled);
         if (widthToDraw <= 0) return;
 
-        Rectangle sourceRect = new(0, 0, widthToDraw, _healthBarTexture.Value.Height); ;
+        Rectangle sourceRect = new(0, 0, widthToDraw, _healthBarTexture.Value.Height);
 
         Main.spriteBatch.Draw(
             _healthBarTexture.Value,
@@ -224,15 +222,15 @@ public class OverhealthUI : ModSystem
         float hpSegmentValue = statsSnapshot.LifePerSegment;
 
         // Retrieve private fields via reflection
-        bool drawText = (bool)self.GetType().GetField("_drawText", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(self);
-        int heartCountRow1 = (int)self.GetType().GetField("_heartCountRow1", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(self);
-        int heartCountRow2 = (int)self.GetType().GetField("_heartCountRow2", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(self);
+        bool drawText = (bool)self.GetType().GetField("_drawText", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(self);
+        int heartCountRow1 = (int)self.GetType().GetField("_heartCountRow1", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(self);
+        int heartCountRow2 = (int)self.GetType().GetField("_heartCountRow2", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(self);
 
-        Vector2 FirstHeartPos = new(Main.screenWidth - 300 + 4, 15f);
+        Vector2 firstHeartPos = new(Main.screenWidth - 300 + 4, 15f);
         if (drawText)
-            FirstHeartPos.Y += 6f;
+            firstHeartPos.Y += 6f;
 
-        Vector2 pos = FirstHeartPos;
+        Vector2 pos = firstHeartPos;
         for (int i = 0; i < heartCountRow1; i++)
         {
             float percentFilled = (overhealth - i * hpSegmentValue) / hpSegmentValue;
@@ -269,7 +267,7 @@ public class OverhealthUI : ModSystem
             pos.X += texture.Value.Width;
         }
 
-        pos = new Vector2(FirstHeartPos.X, FirstHeartPos.Y + 28f);
+        pos = new Vector2(firstHeartPos.X, firstHeartPos.Y + 28f);
         for (int i = 0; i < heartCountRow2; i++)
         {
             int globalIndex = 10 + i;
@@ -324,7 +322,7 @@ public class OverhealthUI : ModSystem
         PlayerStatsSnapshot statsSnapshot = new(Main.LocalPlayer);
         float hpSegmentValue = statsSnapshot.LifePerSegment;
 
-        byte drawTextStyle = (byte)self.GetType().GetField("_drawTextStyle", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(self);
+        byte drawTextStyle = (byte)self.GetType().GetField("_drawTextStyle", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(self);
 
         // From Terraria.GameContent.UI.ResourceSets.HorizontalBarsPlayerResourcesDisplaySet.Draw
         Vector2 topLeft = new(
@@ -350,8 +348,10 @@ public class OverhealthUI : ModSystem
             );
 
             if (i < fullSegments) // Draw full segment without source rect
+            {
                 spriteBatch.Draw(_horizontalBarMiddlePanelTexture.Value, segmentPos, null,
-                                Color.White * HorizontalBarsDisplaySetOpacity, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                                            Color.White * HorizontalBarsDisplaySetOpacity, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            }
             else
             {
                 float percentFilled = overhealth % hpSegmentValue / (float)hpSegmentValue;

@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using CalamityMod;
-using CalamityMod.Enums;
 using CalamityMod.NPCs.AstrumAureus;
 using CalamityMod.NPCs.BrimstoneElemental;
 using CalamityMod.NPCs.Bumblebirb;
@@ -25,8 +24,6 @@ namespace OverhealthMod.Common.Crossmod;
 [ExtendsFromMod("CalamityMod")]
 public class CalamityCrossmodSystem : ModSystem
 {
-    private delegate void orig_HealPlayer(Player player, int amount, HealTextType healTextType);
-
     public override void Load()
     {
         Assembly calamityModAssembly = ModLoader.GetMod("CalamityMod").Code;
