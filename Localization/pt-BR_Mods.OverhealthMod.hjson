@@ -1,1 +1,102 @@
+Colors: {
+	Note: 8FCBFF
+	UsefulToKnow: FE95FF
+	Mention: FFAB65
+	Overhealth: FFE999
+}
 
+Configs: {
+	GameplayConfig: {
+		DisplayName: Jogatina
+		Headers.Decay: Perda
+
+		MaximumOverhealth: {
+			Name: Sobrevida máxima
+			Label: [c/{$Colors.Overhealth}:Sobrevida] máxima
+			Tooltip:
+				'''
+        A quantidade máxima de sobrevida que o jogador pode possuir.
+				Expresso como uma [c/{$Colors.UsefulToKnow}:porcentagem de vida máxima].
+				'''
+		}
+
+		ConstantDecayPercent: {
+			Name: Índice de perda constante
+			Label: "Índice de perda [c/A3C6FF:constante]"
+			Tooltip:
+				'''
+        A velocidade base onde a sobrevida é perdida.
+        Expresso como uma [c/{$Colors.UsefulToKnow}:porcentagem de vida máxima por segundo].
+				'''
+		}
+
+		ProgressiveDecayPercent: {
+			Name: Índice de perda progressiva
+			Label: "Índice de perda [c/C5A3FF:progressiva]"
+			Tooltip:
+				'''
+        Índice de perda adicional que aumenta com sua sobrevida atual.
+        Esse valor é a perda extra à 100% de sobrevida, diminuindo [c/{$Colors.UsefulToKnow}:linearmente] para 0% em 0% de sobrevida.
+        Expresso como uma [c/{$Colors.UsefulToKnow}:porcentagem de vida máxima por segundo].
+				'''
+		}
+
+		DecayMutiplier: {
+			Label: [c/FFA3A3:Multiplicador] do índice de perda
+			Tooltip: Multiplicador geral aplicado tanto para [c/{$Colors.Mention}:{$Configs.GameplayConfig.ConstantDecayPercent.Name}] quanto [c/{$Colors.Mention}:{$Configs.GameplayConfig.ProgressiveDecayPercent.Name}].
+		}
+	}
+
+	VisualConfig: {
+		DisplayName: Visuais
+		Headers.Opacity: Opacidade
+		Common.DisableNote: "[c/{$Colors.Note}:Mude para 0 para desativar.]"
+
+		ShowOverhealthUI: {
+			Label: Mostrar Interface de sobrevida
+			Tooltip: Alterna a renderização de todos os elementos da interface de sobrevida.
+		}
+
+		ClassicDisplaySetOpacity: {
+			Name: "Opacidade do estilo {$UI.HealthManaStyle_Default}"
+			Label: "Opacidade do estilo [c/FFC2EC:{$UI.HealthManaStyle_Default}]"
+			Tooltip:
+				'''
+        Ajusta a opacidade da camada de sobrevida no estilo {$UI.HealthManaStyle_Default}.
+				{$Configs.VisualConfig.Common.DisableNote}
+				'''
+		}
+
+		FancyDisplaySetOpacity: {
+			Name: "Opacidade no estilo {$UI.HealthManaStyle_New}"
+			Label: "Opacidade no estilo [c/FFC2EC:{$UI.HealthManaStyle_New}]"
+			Tooltip:
+				'''
+				Ajusta a opacidade da camada de sobrevida nos estilos {$UI.HealthManaStyle_New} e {$UI.HealthManaStyle_NewWithText}. 
+				{$Configs.VisualConfig.Common.DisableNote}
+				'''
+		}
+
+		HorizontalBarsDisplaySetOpacity: {
+			Name: "Opacidade do estilo {$UI.HealthManaStyle_HorizontalBars}"
+			Label: "Opacidade do estilo [c/FFC2EC:{$UI.HealthManaStyle_HorizontalBars}]"
+			Tooltip:
+				'''
+				Ajusta a opacidade da camada de sobrevida nos estilos {$UI.HealthManaStyle_HorizontalBars}, {$UI.HealthManaStyle_HorizontalBarsWithText} e {$UI.HealthManaStyle_HorizontalBarsWithFullText}. 
+				{$Configs.VisualConfig.Common.DisableNote}
+				'''
+		}
+
+		MultiplayerHealthBarOpacity: {
+			Name: Opacidade de barras de vida no multijogador
+			Label: "Opacidade de barras de vida no [c/DEC2FF:multijogador]"
+			Tooltip:
+				'''
+				Ajusta a opacidade da camada de sobrevida mostrada em barras de vida em outros jogadores.
+				{$Configs.VisualConfig.Common.DisableNote}
+				'''
+		}
+	}
+}
+
+Keybinds.MaxOverhealth.DisplayName: Sobrevida máxima
