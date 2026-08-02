@@ -1,4 +1,5 @@
 # OverhealthMod
+English | [Português brasileiro](README-ptbr.md)
 
 OverhealthMod is a Terraria mod built for tModLoader that introduces an **Overhealth** mechanic—allowing a player's current health (`statLife`) to exceed their maximum health (`statLifeMax2`), displaying it as temporary, decaying overhealth (e.g., `480/400 HP`).
 
