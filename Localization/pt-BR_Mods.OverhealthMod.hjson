@@ -7,7 +7,7 @@ Colors: {
 
 Configs: {
 	GameplayConfig: {
-		DisplayName: Jogatina
+		DisplayName: Jogabilidade
 		Headers.Decay: Perda
 
 		MaximumOverhealth: {
@@ -21,8 +21,8 @@ Configs: {
 		}
 
 		ConstantDecayPercent: {
-			Name: Índice de perda constante
-			Label: "Índice de perda [c/A3C6FF:constante]"
+			Name: Taxa de perda constante
+			Label: "Taxa de perda [c/A3C6FF:constante]"
 			Tooltip:
 				'''
         A velocidade base onde a sobrevida é perdida.
@@ -31,18 +31,18 @@ Configs: {
 		}
 
 		ProgressiveDecayPercent: {
-			Name: Índice de perda progressiva
-			Label: "Índice de perda [c/C5A3FF:progressiva]"
+			Name: Taxa de perda progressiva
+			Label: "Taxa de perda [c/C5A3FF:progressiva]"
 			Tooltip:
 				'''
-        Índice de perda adicional que aumenta com sua sobrevida atual.
+        Taxa de perda adicional que aumenta com sua sobrevida atual.
         Esse valor é a perda extra à 100% de sobrevida, diminuindo [c/{$Colors.UsefulToKnow}:linearmente] para 0% em 0% de sobrevida.
         Expresso como uma [c/{$Colors.UsefulToKnow}:porcentagem de vida máxima por segundo].
 				'''
 		}
 
 		DecayMutiplier: {
-			Label: [c/FFA3A3:Multiplicador] do índice de perda
+			Label: [c/FFA3A3:Multiplicador] da taxa de perda
 			Tooltip: Multiplicador geral aplicado tanto para [c/{$Colors.Mention}:{$Configs.GameplayConfig.ConstantDecayPercent.Name}] quanto [c/{$Colors.Mention}:{$Configs.GameplayConfig.ProgressiveDecayPercent.Name}].
 		}
 	}
