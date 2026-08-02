@@ -7,7 +7,7 @@ OverhealthMod é um mod de Terraria feito para o tModLoader que introduz uma mec
 
 ## Como funciona
 
-Em seu núcleo, **esse mod funciona removendo as verificações e as definições de limite de vida** (como `player.statLife < player.statLifeMax2`, `player.statLife = player.statLifeMax2`) ao longo do código do jogo.
+Em seu princípio, **esse mod funciona removendo as verificações e as definições de limite de vida** (como `player.statLife < player.statLifeMax2`, `player.statLife = player.statLifeMax2`) ao longo do código do jogo.
 
 ### Limitações
 
@@ -22,29 +22,29 @@ Em seu núcleo, **esse mod funciona removendo as verificações e as definiçõe
 ### A Solução
 
 A melhor forma para permitir a vida do jogador passar do máximo é **remover os próprios limites de vida**.
-- **Preserve health regeneration caps**, ensuring natural life regen still respects the standard max health cap (`statLifeMax2`) and not resets overhealth.
-- For other healing methods (potions, lifesteal, special projectile/armor heals), we remove the standard `if (... statLife > statLifeMax2 ...)` and `statLife = statLifeMax2;` caps via IL editing (check out common IL edits in **`CommonIL.cs`**).
-- A passive decay system gradually drains the overhealth back down to the player's max health over time.
-- No netcode, health sync is handled vanilla way.
-- All custom rendering is handled in **`OverhealthUI.cs`**.
+- **Preservar limites de regeneração de vida**, garantindo que a regeneração natural ainda respeite o limite de vida máxima padrão (`statLifeMax2`) e não redefine a sobrevida.
+- Para outros métodos de cura (poções, roubo de vida, curas de projéteis/armaduras especiais), nós removemos os limites `if (... statLife > statLifeMax2 ...)` e `statLife = statLifeMax2;` padrões por meio da edição IL (olhe as edições do common IL no **`CommonIL.cs`**).
+- Um sistema passivo de perda drena gradualmente a sobrevida de volta para a vida máxima do jogador com o tempo.
+- Sem netcode, a sincronização da vida é controlada de forma vanilla.
+- Toda a renderização customizada é controlada em **`OverhealthUI.cs`**.
 
-## File Structure
+## Estrutura de Arquivos
 
-- **`OverhealthPlayer.cs`**: Tracks individual player overhealth state, calculates and applies passive decay rates, and hooks into core player updates.
-- **`OverhealthUI.cs`**: Handles drawing/rendering the overhealth indicator on the player's health bar.
+- **`OverhealthPlayer.cs`**: Monitora o estado de sobrevida do jogador individual, calcula e aplica índices de perda e conecta nas atualizações principais do jogador.
+- **`OverhealthUI.cs`**: Controla a renderização do indicador de sobrevida na barra de vida do jogador.
 - **`Utils/`**:
-  - **`QuickIL.cs`**: A utility helper class that wraps method editing via `MonoModHooks.Modify` for one-line method hooks.
-  - **`CommonIL.cs`**: Contains shared IL manipulation methods to find, remove, or replace vanilla health cap checks.
-- **`Common/Crossmod/`**: Contains crossmod compatibility classes (e.g., `ThoriumCrossmodSystem.cs`) that apply IL edits to other mods' custom healing cap and clamping behaviors.
+  - **`QuickIL.cs`**: Uma classe utilitária que envolve edição de métodos via `MonoModHooks.Modify` para ganchos de método de uma única linha.
+  - **`CommonIL.cs`**: Contém métodos de manipulação IL compartilhados para achar, remover ou substituir as verificações do limite de vida vanilla.
+- **`Common/Crossmod/`**: Contém classes de compatibilidade crossmod (ex: `ThoriumCrossmodSystem.cs`) que aplicam edições IL para o limite de vida customizado e comportamentos de fixação de outros mods.
 
-## How to contribute
+## Como contribuir
 
-To add support for a new mod:
+Para adicionar suporte à um novo mod:
 
-1. Decompile the target mod to find references to `statLife` and `statLifeMax2` where health caps or assignments are checked (you can easily do it in [dnSpy](https://github.com/dnSpyEx/dnSpy)).
-2. Create a new crossmod system class under the `Common/Crossmod/` directory, marked with the target mod's `[ExtendsFromMod("ModName")]` attribute.
-3. Register IL edits using `QuickIL.EditMethod` to remove mod-specific health caps. You can use the common IL edits defined in `CommonIL.cs` for standard instructions.
-4. Update project files:
-   - Update `build.txt` to include the target mod in `weakReferences` if appropriate.
-   - Reference the mod in `OverhealthMod.csproj` for compilation if necessary.
-   - Update the description compatability table in `description_workshop.txt`.
+1. Decompile o mod-alvo para achar referências de `statLife` e `statLifeMax2` onde limites de vida ou tarefas são verificadas (você pode fazer isso facilmente com o [dnSpy](https://github.com/dnSpyEx/dnSpy)).
+2. Crie uma nova classe crossmod system dentro do diretório `Common/Crossmod/`, marcado com o atributo `[ExtendsFromMod("NomeDoMod")] do mod-alvo.
+3. Registre edições IL usando `QuickIL.EditMethod` para remover limites de vida específicos de mods. Você pode usar as edições common IL definidas em `CommonIL.cs` para instruções padrões.
+4. Atualize arquivos do projeto:
+   - Atualize `build.txt` para incluir o mod-alvo em `weakReferences` se apropriado.
+   - Referencie o mod em `OverhealthMod.csproj` para compilação se necessário.
+   - Atualize a descrição de compatibilidade em `description_workshop.txt`.
