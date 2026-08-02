@@ -35,7 +35,7 @@ A melhor forma para permitir a vida do jogador passar do máximo é **remover os
 - **`Utils/`**:
   - **`QuickIL.cs`**: Uma classe utilitária que envolve edição de métodos via `MonoModHooks.Modify` para ganchos de método de uma única linha.
   - **`CommonIL.cs`**: Contém métodos de manipulação IL compartilhados para achar, remover ou substituir as verificações do limite de vida vanilla.
-- **`Common/Crossmod/`**: Contém classes de compatibilidade crossmod (ex: `ThoriumCrossmodSystem.cs`) que aplicam edições IL para o limite de vida customizado e comportamentos de fixação de outros mods.
+- **`Common/Crossmod/`**: Contém classes de compatibilidade crossmod (ex: `ThoriumCrossmodSystem.cs`) que aplicam edições IL para limites de vida customizados e comportamentos de fixação de outros mods.
 
 ## Como contribuir
 
